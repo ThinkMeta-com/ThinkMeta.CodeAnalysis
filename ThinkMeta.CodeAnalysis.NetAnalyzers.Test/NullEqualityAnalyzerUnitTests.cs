@@ -82,13 +82,14 @@ public class NullEqualityAnalyzerUnitTests
 
             class B
             {
+                bool Inner(Expression<Func<object, bool>> o)
+                {
+                    return true;
+                }
+
                 void M()
                 {
-                    Expression<Func<object, bool>> outer = o =>
-                        {
-                            Expression<Func<object, bool>> inner = x => x == null;
-                            return o == null;
-                        };
+                    Expression<Func<object, bool>> outer = o => Inner(o => o == null);
                 }
             }
             """;
