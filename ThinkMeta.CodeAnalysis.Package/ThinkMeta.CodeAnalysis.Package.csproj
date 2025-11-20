@@ -5,7 +5,7 @@
         <Nullable>enable</Nullable>
         <LangVersion>latest</LangVersion>
 
-        <PackageId>ThinkMeta.CodeAnalysis</PackageId>
+        <PackageId>ThinkMeta.CodeAnalysis.CSharp</PackageId>
         <Title>Static code analyzer for C#</Title>
         <Description>Static code analyzer for C#</Description>
         <Copyright>Copyright (c) 2025 ThinkMeta Software GmbH</Copyright>

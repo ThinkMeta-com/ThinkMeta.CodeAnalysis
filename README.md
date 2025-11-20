@@ -1,7 +1,7 @@
 # ThinkMeta.CodeAnalysis
 Static code analyzer for C#
 
-[![NuGet Package](https://img.shields.io/nuget/v/ThinkMeta.CodeAnalysis)](https://www.nuget.org/packages/ThinkMeta.CodeAnalysis) ThinkMeta.CodeAnalysis<br>
+[![NuGet Package](https://img.shields.io/nuget/v/ThinkMeta.CodeAnalysis.CSharp)](https://www.nuget.org/packages/ThinkMeta.CodeAnalysis.CSharp) ThinkMeta.CodeAnalysis.CSharp<br>
 
 ## Overview
 ThinkMeta.CodeAnalysis is a static code analyzer for C# projects, built on Roslyn. It helps developers identify code issues, enforce coding standards, and improve code quality automatically.
