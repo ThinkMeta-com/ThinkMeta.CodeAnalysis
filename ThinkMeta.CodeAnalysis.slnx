@@ -1,0 +1,35 @@
+<Solution>
+  <Folder Name="/Solution Files/">
+    <File Path="Directory.Build.props" />
+    <File Path="Directory.Packages.Props" />
+    <File Path="LICENSE" />
+    <File Path="README.md" />
+    <File Path="RELEASE_NOTES.md" />
+    <File Path="SolutionFiles/ThinkMeta.CodeAnalysis.Net.props" />
+  </Folder>
+  <Folder Name="/ThinkMeta.SolutionFiles/">
+    <File Path="ThinkMeta.SolutionFiles/.clang-format" />
+    <File Path="ThinkMeta.SolutionFiles/.editorconfig" />
+    <File Path="ThinkMeta.SolutionFiles/LICENSE" />
+    <File Path="ThinkMeta.SolutionFiles/README.md" />
+    <File Path="ThinkMeta.SolutionFiles/ThinkMeta.Build.props" />
+    <File Path="ThinkMeta.SolutionFiles/ThinkMeta.Cpp.Build.props" />
+    <File Path="ThinkMeta.SolutionFiles/ThinkMeta.Cpp.Configurations.props" />
+    <File Path="ThinkMeta.SolutionFiles/ThinkMeta.Cpp.ForceImportAfterCppDefaultProps.props" />
+    <File Path="ThinkMeta.SolutionFiles/ThinkMeta.Cpp.ForceImportAfterCppProps.props" />
+    <File Path="ThinkMeta.SolutionFiles/ThinkMeta.Cpp.ForceImportAfterCppTargets.targets" />
+    <File Path="ThinkMeta.SolutionFiles/ThinkMeta.Cpp.ForceImportBeforeCppProps.props" />
+    <File Path="ThinkMeta.SolutionFiles/ThinkMeta.Cpp.ForceImportBeforeCppTargets.targets" />
+    <File Path="ThinkMeta.SolutionFiles/ThinkMeta.Cpp.StaticLibrary.props" />
+    <File Path="ThinkMeta.SolutionFiles/ThinkMeta.CsWarnings.props" />
+    <File Path="ThinkMeta.SolutionFiles/ThinkMeta.Net.Build.props" />
+    <File Path="ThinkMeta.SolutionFiles/ThinkMeta.Net.Build.targets" />
+    <File Path="ThinkMeta.SolutionFiles/ThinkMeta.Packages.props" />
+  </Folder>
+  <Project Path="ThinkMeta.CodeAnalysis.Package/ThinkMeta.CodeAnalysis.Package.csproj" Id="9b3f4853-4d98-403c-b516-7970f1459761">
+    <Build Solution="Debug|*" Project="false" />
+  </Project>
+  <Project Path="ThinkMeta.CodeAnalysis/ThinkMeta.CodeAnalysis.CodeFixes/ThinkMeta.CodeAnalysis.CodeFixes.csproj" />
+  <Project Path="ThinkMeta.CodeAnalysis/ThinkMeta.CodeAnalysis.Test/ThinkMeta.CodeAnalysis.Test.csproj" />
+  <Project Path="ThinkMeta.CodeAnalysis/ThinkMeta.CodeAnalysis/ThinkMeta.CodeAnalysis.csproj" />
+</Solution>

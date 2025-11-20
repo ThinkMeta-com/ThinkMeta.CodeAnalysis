@@ -1,0 +1,32 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <TargetFramework>netstandard2.0</TargetFramework>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+        <LangVersion>latest</LangVersion>
+        
+        <Title>Static code analyzer for C#</Title>
+        <Description>Static code analyzer for C#</Description>
+        <Copyright>Copyright (c) 2025 ThinkMeta Software GmbH</Copyright>
+        <PackageProjectUrl>https://github.com/ThinkMeta-com/ThinkMeta.CodeAnalysis</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/ThinkMeta-com/ThinkMeta.CodeAnalysis.git</RepositoryUrl>
+        <PackageTags>code analyzer;Roslyn;static analysis;C#;dotnet analyzer</PackageTags>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <Version>$(SolutionPackageVersion)</Version>
+    </PropertyGroup>
+    
+    <ItemGroup>
+        <ProjectReference Include="..\ThinkMeta.CodeAnalysis\ThinkMeta.CodeAnalysis.CodeFixes\ThinkMeta.CodeAnalysis.CodeFixes.csproj" />
+        <ProjectReference Include="..\ThinkMeta.CodeAnalysis\ThinkMeta.CodeAnalysis\ThinkMeta.CodeAnalysis.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Include="$(TM_BuildPath)Release\bin\netstandard2.0\ThinkMeta.CodeAnalysis.dll" Pack="true" PackagePath="analyzers/dotnet/cs" />
+        <None Include="$(TM_BuildPath)Release\bin\netstandard2.0\ThinkMeta.CodeAnalysis.CodeFixes.dll" Pack="true" PackagePath="analyzers/dotnet/cs" />
+
+        <None Include="$(SolutionDir)LICENSE" Pack="true" PackagePath="/" />
+        <None Include="$(SolutionDir)README.md" Pack="true" PackagePath="/" />
+        <None Include="$(SolutionDir)RELEASE_NOTES.md" Pack="true" PackagePath="/" />
+    </ItemGroup>
+</Project>
