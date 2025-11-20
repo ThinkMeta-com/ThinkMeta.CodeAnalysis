@@ -2,7 +2,7 @@
 using Microsoft.CodeAnalysis.CSharp.Testing;
 using Microsoft.CodeAnalysis.Diagnostics;
 using Microsoft.CodeAnalysis.Testing;
-using ThinkMeta.CodeAnalysis.Test.Verifiers;
+using ThinkMeta.CodeAnalysis.NetAnalyzers.Test.Verifiers;
 
 namespace ThinkMeta.CodeAnalysis.Test;
 

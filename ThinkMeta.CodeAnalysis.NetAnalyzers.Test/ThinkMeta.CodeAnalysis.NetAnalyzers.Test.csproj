@@ -19,8 +19,8 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\ThinkMeta.CodeAnalysis.CodeFixes\ThinkMeta.CodeAnalysis.CodeFixes.csproj" />
-        <ProjectReference Include="..\ThinkMeta.CodeAnalysis\ThinkMeta.CodeAnalysis.csproj" />
+        <ProjectReference Include="..\ThinkMeta.CodeAnalysis.NetAnalyzers.CodeFixes\ThinkMeta.CodeAnalysis.NetAnalyzers.CodeFixes.csproj" />
+        <ProjectReference Include="..\ThinkMeta.CodeAnalysis.NetAnalyzers\ThinkMeta.CodeAnalysis.NetAnalyzers.csproj" />
     </ItemGroup>
 
 </Project>

@@ -6,7 +6,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System.Collections.Immutable;
 using System.Composition;
 
-namespace ThinkMeta.CodeAnalysis;
+namespace ThinkMeta.CodeAnalysis.NetAnalyzers;
 
 /// <summary>
 /// Provides a code fix for diagnostics that identify equality comparisons to null, replacing them with pattern matching

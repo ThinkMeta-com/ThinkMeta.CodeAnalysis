@@ -4,7 +4,7 @@ using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Diagnostics;
 using System.Collections.Immutable;
 
-namespace ThinkMeta.CodeAnalysis;
+namespace ThinkMeta.CodeAnalysis.NetAnalyzers;
 
 /// <summary>
 /// Analyzes C# code to detect and report usage of equality or inequality comparisons with null.

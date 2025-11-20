@@ -2,7 +2,7 @@
 using Microsoft.CodeAnalysis.CSharp;
 using System.Collections.Immutable;
 
-namespace ThinkMeta.CodeAnalysis.Test.Verifiers;
+namespace ThinkMeta.CodeAnalysis.NetAnalyzers.Test.Verifiers;
 
 internal static class CSharpVerifierHelper
 {

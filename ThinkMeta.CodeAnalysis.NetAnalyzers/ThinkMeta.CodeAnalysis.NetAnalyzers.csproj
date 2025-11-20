@@ -4,6 +4,8 @@
         <LangVersion>latest</LangVersion>
         <IsPackable>false</IsPackable>
         <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
+        <Version>$(SolutionPackageVersion)</Version>
+        <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
     </PropertyGroup>
 
     <ItemGroup>

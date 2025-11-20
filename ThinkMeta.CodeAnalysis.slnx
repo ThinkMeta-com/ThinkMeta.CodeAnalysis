@@ -29,7 +29,7 @@
   <Project Path="ThinkMeta.CodeAnalysis.Package/ThinkMeta.CodeAnalysis.Package.csproj" Id="9b3f4853-4d98-403c-b516-7970f1459761">
     <Build Solution="Debug|*" Project="false" />
   </Project>
-  <Project Path="ThinkMeta.CodeAnalysis/ThinkMeta.CodeAnalysis.CodeFixes/ThinkMeta.CodeAnalysis.CodeFixes.csproj" />
-  <Project Path="ThinkMeta.CodeAnalysis/ThinkMeta.CodeAnalysis.Test/ThinkMeta.CodeAnalysis.Test.csproj" />
-  <Project Path="ThinkMeta.CodeAnalysis/ThinkMeta.CodeAnalysis/ThinkMeta.CodeAnalysis.csproj" />
+  <Project Path="ThinkMeta.CodeAnalysis.NetAnalyzers.CodeFixes/ThinkMeta.CodeAnalysis.NetAnalyzers.CodeFixes.csproj" />
+  <Project Path="ThinkMeta.CodeAnalysis.NetAnalyzers.Test/ThinkMeta.CodeAnalysis.NetAnalyzers.Test.csproj" />
+  <Project Path="ThinkMeta.CodeAnalysis.NetAnalyzers/ThinkMeta.CodeAnalysis.NetAnalyzers.csproj" />
 </Solution>

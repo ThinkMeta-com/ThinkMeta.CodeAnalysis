@@ -1,10 +1,10 @@
 ﻿using VerifyCS = ThinkMeta.CodeAnalysis.Test.CSharpCodeFixVerifier<
-    ThinkMeta.CodeAnalysis.NullEqualityAnalyzer,
-    ThinkMeta.CodeAnalysis.NullEqualityCodeFixProvider>;
+    ThinkMeta.CodeAnalysis.NetAnalyzers.NullEqualityAnalyzer,
+    ThinkMeta.CodeAnalysis.NetAnalyzers.NullEqualityCodeFixProvider>;
 
 [assembly: Parallelize]
 
-namespace ThinkMeta.CodeAnalysis.Test;
+namespace ThinkMeta.CodeAnalysis.NetAnalyzers.Test;
 
 [TestClass]
 public class NullEqualityAnalyzerUnitTests

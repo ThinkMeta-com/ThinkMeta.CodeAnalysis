@@ -2,8 +2,10 @@
     <PropertyGroup>
         <TargetFramework>netstandard2.0</TargetFramework>
         <IsPackable>false</IsPackable>
-        <RootNamespace>ThinkMeta.CodeAnalysis</RootNamespace>
+        <RootNamespace>ThinkMeta.CodeAnalysis.NetAnalyzers</RootNamespace>
         <LangVersion>latest</LangVersion>
+        <Version>$(SolutionPackageVersion)</Version>
+        <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
     </PropertyGroup>
 
     <ItemGroup>
@@ -11,6 +13,6 @@
     </ItemGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\ThinkMeta.CodeAnalysis\ThinkMeta.CodeAnalysis.csproj" />
+        <ProjectReference Include="..\ThinkMeta.CodeAnalysis.NetAnalyzers\ThinkMeta.CodeAnalysis.NetAnalyzers.csproj" />
     </ItemGroup>
 </Project>

@@ -18,13 +18,13 @@
     </PropertyGroup>
     
     <ItemGroup>
-        <ProjectReference Include="..\ThinkMeta.CodeAnalysis\ThinkMeta.CodeAnalysis.CodeFixes\ThinkMeta.CodeAnalysis.CodeFixes.csproj" />
-        <ProjectReference Include="..\ThinkMeta.CodeAnalysis\ThinkMeta.CodeAnalysis\ThinkMeta.CodeAnalysis.csproj" />
+        <ProjectReference Include="..\ThinkMeta.CodeAnalysis.NetAnalyzers.CodeFixes\ThinkMeta.CodeAnalysis.NetAnalyzers.CodeFixes.csproj" PrivateAssets="All" />
+        <ProjectReference Include="..\ThinkMeta.CodeAnalysis.NetAnalyzers\ThinkMeta.CodeAnalysis.NetAnalyzers.csproj" PrivateAssets="All" />
     </ItemGroup>
 
     <ItemGroup>
-        <None Include="$(TM_BuildPath)Release\bin\netstandard2.0\ThinkMeta.CodeAnalysis.dll" Pack="true" PackagePath="analyzers/dotnet/cs" />
-        <None Include="$(TM_BuildPath)Release\bin\netstandard2.0\ThinkMeta.CodeAnalysis.CodeFixes.dll" Pack="true" PackagePath="analyzers/dotnet/cs" />
+        <None Include="$(TM_BuildPath)Release\bin\netstandard2.0\ThinkMeta.CodeAnalysis.NetAnalyzers.dll" Pack="true" PackagePath="analyzers/dotnet/cs" />
+        <None Include="$(TM_BuildPath)Release\bin\netstandard2.0\ThinkMeta.CodeAnalysis.NetAnalyzers.CodeFixes.dll" Pack="true" PackagePath="analyzers/dotnet/cs" />
 
         <None Include="$(SolutionDir)LICENSE" Pack="true" PackagePath="/" />
         <None Include="$(SolutionDir)README.md" Pack="true" PackagePath="/" />
