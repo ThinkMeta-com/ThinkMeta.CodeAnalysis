@@ -57,18 +57,19 @@ public class NullEqualityAnalyzer : DiagnosticAnalyzer
 
     private static bool IsInsideExpressionTree(SyntaxNodeAnalysisContext context)
     {
-        var node = context.Node;
         var semanticModel = context.SemanticModel;
+        var node = context.Node;
 
-        var lambda = node.FirstAncestorOrSelf<LambdaExpressionSyntax>();
-        if (lambda == null)
-            return false;
+        foreach (var lambda in node.Ancestors().OfType<LambdaExpressionSyntax>()) {
+            var typeInfo = semanticModel.GetTypeInfo(lambda, context.CancellationToken);
+            var convertedType = typeInfo.ConvertedType;
 
-        var typeInfo = semanticModel.GetTypeInfo(lambda, context.CancellationToken);
-        var convertedType = typeInfo.ConvertedType;
+            if (convertedType != null &&
+                convertedType.OriginalDefinition.ToString().StartsWith("System.Linq.Expressions.Expression")) {
+                return true;
+            }
+        }
 
-        return convertedType != null &&
-               convertedType.OriginalDefinition.ToString().StartsWith("System.Linq.Expressions.Expression");
+        return false;
     }
-
 }
