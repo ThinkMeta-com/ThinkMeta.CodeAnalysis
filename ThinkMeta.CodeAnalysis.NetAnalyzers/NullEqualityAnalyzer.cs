@@ -26,22 +26,24 @@ public class NullEqualityAnalyzer : DiagnosticAnalyzer
     /// <inheritdoc/>
     public override void Initialize(AnalysisContext context)
     {
-        context.ConfigureGeneratedCodeAnalysis(GeneratedCodeAnalysisFlags.None);
+        // Enable analysis of generated code, especially for .razor-generated files
+        context.ConfigureGeneratedCodeAnalysis(GeneratedCodeAnalysisFlags.Analyze | GeneratedCodeAnalysisFlags.ReportDiagnostics);
         context.EnableConcurrentExecution();
         context.RegisterSyntaxNodeAction(AnalyzeBinaryExpression, SyntaxKind.EqualsExpression, SyntaxKind.NotEqualsExpression);
     }
 
     private static void AnalyzeBinaryExpression(SyntaxNodeAnalysisContext context)
     {
+        if (!IsSupportedFile(context))
+            return;
+
         var binaryExpr = (BinaryExpressionSyntax)context.Node;
 
         // Bail out if inside an expression tree
         if (IsInsideExpressionTree(context))
             return;
 
-        // Check if either side is null literal
-        if (binaryExpr.Right.IsKind(SyntaxKind.NullLiteralExpression) ||
-            binaryExpr.Left.IsKind(SyntaxKind.NullLiteralExpression)) {
+        if (binaryExpr.Right.IsKind(SyntaxKind.NullLiteralExpression) || binaryExpr.Left.IsKind(SyntaxKind.NullLiteralExpression)) {
             var operatorText = binaryExpr.OperatorToken.Text; // "==" or "!="
             var replacement = operatorText == "==" ? "is null" : "is not null";
 
@@ -64,12 +66,24 @@ public class NullEqualityAnalyzer : DiagnosticAnalyzer
             var typeInfo = semanticModel.GetTypeInfo(lambda, context.CancellationToken);
             var convertedType = typeInfo.ConvertedType;
 
-            if (convertedType != null &&
+            if (convertedType is not null &&
                 convertedType.OriginalDefinition.ToString().StartsWith("System.Linq.Expressions.Expression")) {
                 return true;
             }
         }
 
         return false;
+    }
+
+    // Only analyze .g.cs files if they are generated from .razor files (Razor components).
+    // All non-generated files are always supported.
+    private static bool IsSupportedFile(SyntaxNodeAnalysisContext context)
+    {
+        var filePath = context.Node.SyntaxTree.FilePath;
+
+        if (filePath.EndsWith(".g.cs", StringComparison.OrdinalIgnoreCase))
+            return filePath.Contains(".razor", StringComparison.OrdinalIgnoreCase);
+
+        return true;
     }
 }

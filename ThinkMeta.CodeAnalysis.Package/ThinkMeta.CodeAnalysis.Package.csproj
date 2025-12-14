@@ -14,11 +14,13 @@
         <PackageTags>code analyzer;Roslyn;static analysis;C#;dotnet analyzer</PackageTags>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
-        <Version>$(SolutionPackageVersion)</Version>
+        <Version>1.0.5</Version>
 
         <PackageReleaseNotes>
-            Fixed false positives in nested expression trees.
+            Improved Razor and query syntax support in NullEqualityAnalyzer.
         </PackageReleaseNotes>
+
+        <TM_NoAnalyzers>true</TM_NoAnalyzers>
     </PropertyGroup>
     
     <ItemGroup>

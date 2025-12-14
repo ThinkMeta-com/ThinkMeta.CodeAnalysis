@@ -12,20 +12,54 @@ public class NullEqualityAnalyzerUnitTests
     [TestMethod]
     public async Task Test_IsNull_Async()
     {
-        var test = "namespace A { class B { void M(object o) { if (o == null) { } } } }";
-        var fixtest = "namespace A { class B { void M(object o) { if (o is null) { } } } }";
+        var test = """
+            class A
+            {
+                void M(object o)
+                {
+                    if (o == null) { }
+                }
+            }
+            """;
 
-        var expected = VerifyCS.Diagnostic("TM0001").WithSpan(1, 48, 1, 57).WithArguments("is null", "== null");
+        var fixtest = """
+            class A
+            {
+                void M(object o)
+                {
+                    if (o is null) { }
+                }
+            }
+            """;
+
+        var expected = VerifyCS.Diagnostic("TM0001").WithSpan(5, 13, 5, 22).WithArguments("is null", "== null");
         await VerifyCS.VerifyCodeFixAsync(test, expected, fixtest);
     }
 
     [TestMethod]
     public async Task Test_IsNotNull_Async()
     {
-        var test = "namespace A { class B { void M(object o) { if (o != null) { } } } }";
-        var fixtest = "namespace A { class B { void M(object o) { if (o is not null) { } } } }";
+        var test = """
+            class A
+            {
+                void M(object o)
+                {
+                    if (o != null) { }
+                }
+            }
+            """;
 
-        var expected = VerifyCS.Diagnostic("TM0001").WithSpan(1, 48, 1, 57).WithArguments("is not null", "!= null");
+        var fixtest = """
+            class A
+            {
+                void M(object o)
+                {
+                    if (o is not null) { }
+                }
+            }
+            """;
+
+        var expected = VerifyCS.Diagnostic("TM0001").WithSpan(5, 13, 5, 22).WithArguments("is not null", "!= null");
         await VerifyCS.VerifyCodeFixAsync(test, expected, fixtest);
     }
 
@@ -36,9 +70,7 @@ public class NullEqualityAnalyzerUnitTests
             using System;
             using System.Linq.Expressions;
             
-            namespace A;
-            
-            class B
+            class A
             {
                 void M()
                 {
@@ -57,9 +89,7 @@ public class NullEqualityAnalyzerUnitTests
             using System;
             using System.Linq.Expressions;
             
-            namespace A;
-            
-            class B
+            class A
             {
                 void M()
                 {
@@ -78,9 +108,7 @@ public class NullEqualityAnalyzerUnitTests
             using System;
             using System.Linq.Expressions;
 
-            namespace A;
-
-            class B
+            class A
             {
                 bool Inner(Expression<Func<object, bool>> o)
                 {
@@ -95,5 +123,67 @@ public class NullEqualityAnalyzerUnitTests
             """;
 
         await VerifyCS.VerifyAnalyzerAsync(test);
+    }
+
+    [TestMethod]
+    public async Task Test_QuerySyntax_IsNull_Async()
+    {
+        var test = """
+            using System.Linq;
+
+            class A
+            {
+                void M(object[] arr)
+                {
+                    var q = from o in arr where o == null select o;
+                }
+            }
+            """;
+
+        var fixtest = """
+            using System.Linq;
+            
+            class A
+            {
+                void M(object[] arr)
+                {
+                    var q = from o in arr where o is null select o;
+                }
+            }
+            """;
+
+        var expected = VerifyCS.Diagnostic("TM0001").WithSpan(7, 37, 7, 46).WithArguments("is null", "== null");
+        await VerifyCS.VerifyCodeFixAsync(test, expected, fixtest);
+    }
+
+    [TestMethod]
+    public async Task Test_QuerySyntax_IsNotNull_Async()
+    {
+        var test = """
+            using System.Linq;
+            
+            class A
+            {
+                void M(object[] arr)
+                {
+                    var q = from o in arr where o != null select o;
+                }
+            }
+            """;
+
+        var fixtest = """
+            using System.Linq;
+            
+            class A
+            {
+                void M(object[] arr)
+                {
+                    var q = from o in arr where o is not null select o;
+                }
+            }
+            """;
+
+        var expected = VerifyCS.Diagnostic("TM0001").WithSpan(7, 37, 7, 46).WithArguments("is not null", "!= null");
+        await VerifyCS.VerifyCodeFixAsync(test, expected, fixtest);
     }
 }

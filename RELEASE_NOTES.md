@@ -1,6 +1,9 @@
 # Release Notes
 
 ## 1.0.5
+- Improved Razor and query syntax support in NullEqualityAnalyzer.
+
+## 1.0.4
 - Fixed false positives in nested expression trees.
 
 ## 1.0.1

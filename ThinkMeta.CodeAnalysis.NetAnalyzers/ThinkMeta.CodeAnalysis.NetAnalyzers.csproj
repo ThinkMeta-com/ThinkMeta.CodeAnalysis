@@ -6,6 +6,8 @@
         <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
         <Version>$(SolutionPackageVersion)</Version>
         <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+
+        <TM_NoAnalyzers>true</TM_NoAnalyzers>
     </PropertyGroup>
 
     <ItemGroup>

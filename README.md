@@ -26,17 +26,23 @@ Replace `== null` with `is null`, and `!= null` with `is not null`.
 **Exceptions:**  
 Null checks using `== null` or `!= null` inside expression trees (e.g., lambdas assigned to `Expression<Func<...>>`) are not reported by this diagnostic, as pattern matching is not supported in expression trees.
 
-**Example:**
+**Examples:**
+
 ```csharp
-// Bad
+// Standard null check
 if (obj == null) { }
-
-// Good
+// =>
 if (obj is null) { }
-```
 
-**Example (no warning):**
-```csharp
-using System.Linq.Expressions;
+// Query syntax
+var q = from o in arr where o == null select o;
+// =>
+var q = from o in arr where o is null select o;
 
+// Razor-generated (in .g.cs from .razor)
+@if (Model == null) { <text>Empty</text> }
+// =>
+@if (Model is null) { <text>Empty</text> }
+
+// No warning in expression trees
 Expression<Func<object, bool>> expr = o => o == null; // No diagnostic

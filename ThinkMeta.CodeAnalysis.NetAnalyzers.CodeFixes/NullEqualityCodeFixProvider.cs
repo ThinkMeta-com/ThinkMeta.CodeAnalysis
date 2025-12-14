@@ -31,17 +31,21 @@ public class NullEqualityCodeFixProvider : CodeFixProvider
         var diagnostic = context.Diagnostics.First();
         var root = await context.Document.GetSyntaxRootAsync(context.CancellationToken).ConfigureAwait(false);
 
-        if (root?.FindNode(diagnostic.Location.SourceSpan) is not BinaryExpressionSyntax node)
+        // Support code fix for query syntax as well as normal binary expressions
+        var node = root?.FindNode(diagnostic.Location.SourceSpan);
+        if (node is not BinaryExpressionSyntax binaryNode)
             return;
 
-        var replacement = node.IsKind(SyntaxKind.EqualsExpression)
-            ? $"{node.Left} is null"
-            : $"{node.Left} is not null";
+        var left = binaryNode.Left;
+        // In query syntax, left side may be a complex expression, so preserve trivia
+        var replacement = binaryNode.IsKind(SyntaxKind.EqualsExpression)
+            ? $"{left} is null"
+            : $"{left} is not null";
 
         context.RegisterCodeFix(
             CodeAction.Create(
                 title: "Use pattern matching null check",
-                createChangedDocument: c => ReplaceWithPatternAsync(context.Document, node, replacement, c),
+                createChangedDocument: c => ReplaceWithPatternAsync(context.Document, binaryNode, replacement, c),
                 equivalenceKey: "UsePatternMatchingNullCheck"),
             diagnostic);
     }
