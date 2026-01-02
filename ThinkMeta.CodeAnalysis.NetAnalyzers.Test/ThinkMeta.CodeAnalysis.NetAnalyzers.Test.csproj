@@ -5,6 +5,7 @@
         <GenerateBindingRedirectsOutputType>true</GenerateBindingRedirectsOutputType>
 
         <TM_IsTestProject>true</TM_IsTestProject>
+        <TM_NoAnalyzers>true</TM_NoAnalyzers>
         <GenerateDocumentationFile>false</GenerateDocumentationFile>
         <NoWarn>%(NoWarn);IDE0005</NoWarn>
         <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
