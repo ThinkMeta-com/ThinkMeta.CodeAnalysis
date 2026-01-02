@@ -14,12 +14,10 @@
         <PackageTags>code analyzer;Roslyn;static analysis;C#;dotnet analyzer</PackageTags>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
-        <Version>1.0.6</Version>
+        <Version>1.0.7</Version>
 
         <PackageReleaseNotes>
-            Added DeepCopy usage analyzer (TM0002) to enforce correct DeepCopy attribute usage and sealed types.
-            Added DeepCopy method completeness analyzer (TM0003) to warn on incomplete DeepCopy implementations.
-            Improved Razor and query syntax support in NullEqualityAnalyzer.
+            Fixed missing assembly in package
         </PackageReleaseNotes>
 
         <TM_NoAnalyzers>true</TM_NoAnalyzers>
@@ -31,6 +29,7 @@
     </ItemGroup>
 
     <ItemGroup>
+        <None Include="$(TM_BuildPath)Release\bin\netstandard2.0\ThinkMeta.CodeAnalysis.Annotations.dll" Pack="true" PackagePath="analyzers/dotnet/cs" />
         <None Include="$(TM_BuildPath)Release\bin\netstandard2.0\ThinkMeta.CodeAnalysis.NetAnalyzers.dll" Pack="true" PackagePath="analyzers/dotnet/cs" />
         <None Include="$(TM_BuildPath)Release\bin\netstandard2.0\ThinkMeta.CodeAnalysis.NetAnalyzers.CodeFixes.dll" Pack="true" PackagePath="analyzers/dotnet/cs" />
 
