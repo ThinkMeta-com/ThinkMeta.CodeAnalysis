@@ -26,10 +26,11 @@
     <File Path="ThinkMeta.SolutionFiles/ThinkMeta.Net.Build.targets" />
     <File Path="ThinkMeta.SolutionFiles/ThinkMeta.Packages.props" />
   </Folder>
-  <Project Path="ThinkMeta.CodeAnalysis.Package/ThinkMeta.CodeAnalysis.Package.csproj" Id="9b3f4853-4d98-403c-b516-7970f1459761">
-    <Build Solution="Debug|*" Project="false" />
-  </Project>
+  <Project Path="ThinkMeta.CodeAnalysis.Annotations/ThinkMeta.CodeAnalysis.Annotations.csproj" Id="c47243ac-bf0e-4936-8400-9b9e1876ae75" />
   <Project Path="ThinkMeta.CodeAnalysis.NetAnalyzers.CodeFixes/ThinkMeta.CodeAnalysis.NetAnalyzers.CodeFixes.csproj" />
   <Project Path="ThinkMeta.CodeAnalysis.NetAnalyzers.Test/ThinkMeta.CodeAnalysis.NetAnalyzers.Test.csproj" />
   <Project Path="ThinkMeta.CodeAnalysis.NetAnalyzers/ThinkMeta.CodeAnalysis.NetAnalyzers.csproj" />
+  <Project Path="ThinkMeta.CodeAnalysis.Package/ThinkMeta.CodeAnalysis.Package.csproj" Id="9b3f4853-4d98-403c-b516-7970f1459761">
+    <Build Solution="Debug|*" Project="false" />
+  </Project>
 </Solution>

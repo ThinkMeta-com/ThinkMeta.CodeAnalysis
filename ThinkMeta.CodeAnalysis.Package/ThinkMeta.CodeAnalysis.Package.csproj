@@ -14,9 +14,11 @@
         <PackageTags>code analyzer;Roslyn;static analysis;C#;dotnet analyzer</PackageTags>
         <PackageReadmeFile>README.md</PackageReadmeFile>
         <PackageLicenseExpression>MIT</PackageLicenseExpression>
-        <Version>1.0.5</Version>
+        <Version>1.0.6</Version>
 
         <PackageReleaseNotes>
+            Added DeepCopy usage analyzer (TM0002) to enforce correct DeepCopy attribute usage and sealed types.
+            Added DeepCopy method completeness analyzer (TM0003) to warn on incomplete DeepCopy implementations.
             Improved Razor and query syntax support in NullEqualityAnalyzer.
         </PackageReleaseNotes>
 
