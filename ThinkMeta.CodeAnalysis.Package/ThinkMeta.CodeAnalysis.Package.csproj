@@ -5,23 +5,12 @@
         <Nullable>enable</Nullable>
         <LangVersion>latest</LangVersion>
 
-        <PackageId>ThinkMeta.CodeAnalysis.CSharp</PackageId>
-        <Title>Static code analyzer for C#</Title>
-        <Description>Static code analyzer for C#</Description>
-        <Copyright>Copyright (c) 2025 ThinkMeta Software GmbH</Copyright>
-        <PackageProjectUrl>https://github.com/ThinkMeta-com/ThinkMeta.CodeAnalysis</PackageProjectUrl>
-        <RepositoryUrl>https://github.com/ThinkMeta-com/ThinkMeta.CodeAnalysis.git</RepositoryUrl>
-        <PackageTags>code analyzer;Roslyn;static analysis;C#;dotnet analyzer</PackageTags>
-        <PackageReadmeFile>README.md</PackageReadmeFile>
-        <PackageLicenseExpression>MIT</PackageLicenseExpression>
-        <Version>1.0.7</Version>
-
-        <PackageReleaseNotes>
-            Fixed missing assembly in package
-        </PackageReleaseNotes>
-
         <TM_NoAnalyzers>true</TM_NoAnalyzers>
     </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="ThinkMeta.CodeAnalysis.Annotations" />
+    </ItemGroup>
     
     <ItemGroup>
         <ProjectReference Include="..\ThinkMeta.CodeAnalysis.NetAnalyzers.CodeFixes\ThinkMeta.CodeAnalysis.NetAnalyzers.CodeFixes.csproj" PrivateAssets="All" />
@@ -29,7 +18,6 @@
     </ItemGroup>
 
     <ItemGroup>
-        <None Include="$(TM_BuildPath)Release\bin\netstandard2.0\ThinkMeta.CodeAnalysis.Annotations.dll" Pack="true" PackagePath="analyzers/dotnet/cs" />
         <None Include="$(TM_BuildPath)Release\bin\netstandard2.0\ThinkMeta.CodeAnalysis.NetAnalyzers.dll" Pack="true" PackagePath="analyzers/dotnet/cs" />
         <None Include="$(TM_BuildPath)Release\bin\netstandard2.0\ThinkMeta.CodeAnalysis.NetAnalyzers.CodeFixes.dll" Pack="true" PackagePath="analyzers/dotnet/cs" />
 

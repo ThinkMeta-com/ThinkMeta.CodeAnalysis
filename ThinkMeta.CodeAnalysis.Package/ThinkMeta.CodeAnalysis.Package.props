@@ -1,0 +1,18 @@
+<Project>
+    <PropertyGroup>
+        <TM_GitHubProjectName>ThinkMeta.CodeAnalysis</TM_GitHubProjectName>
+
+        <PackageId>ThinkMeta.CodeAnalysis.CSharp</PackageId>
+        <Title>Static code analyzer for C#</Title>
+        <Description>Static code analyzer for C#</Description>
+        <TM_GitHubProjectName>ThinkMeta.CodeAnalysis</TM_GitHubProjectName>
+        <PackageTags>code analyzer;Roslyn;static analysis;C#;dotnet analyzer</PackageTags>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <Version>$(SolutionPackageVersion)</Version>
+
+        <PackageReleaseNotes>
+            Fixed packaging issue with Annotations assembly.
+        </PackageReleaseNotes>
+    </PropertyGroup>
+</Project>
