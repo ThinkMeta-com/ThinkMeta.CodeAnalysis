@@ -12,7 +12,7 @@
         <Version>$(SolutionPackageVersion)</Version>
 
         <PackageReleaseNotes>
-            Fixed packaging issue with Annotations assembly.
+            Removed non-working analyzer rules.
         </PackageReleaseNotes>
     </PropertyGroup>
 </Project>

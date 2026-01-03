@@ -9,10 +9,6 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <PackageReference Include="ThinkMeta.CodeAnalysis.Annotations" />
-    </ItemGroup>
-    
-    <ItemGroup>
         <ProjectReference Include="..\ThinkMeta.CodeAnalysis.NetAnalyzers.CodeFixes\ThinkMeta.CodeAnalysis.NetAnalyzers.CodeFixes.csproj" PrivateAssets="All" />
         <ProjectReference Include="..\ThinkMeta.CodeAnalysis.NetAnalyzers\ThinkMeta.CodeAnalysis.NetAnalyzers.csproj" PrivateAssets="All" />
     </ItemGroup>

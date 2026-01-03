@@ -13,6 +13,5 @@
     <ItemGroup>
         <PackageReference Include="Microsoft.CodeAnalysis.Analyzers" />
         <PackageReference Include="Microsoft.CodeAnalysis.CSharp" />
-        <PackageReference Include="ThinkMeta.CodeAnalysis.Annotations" />
     </ItemGroup>
 </Project>
