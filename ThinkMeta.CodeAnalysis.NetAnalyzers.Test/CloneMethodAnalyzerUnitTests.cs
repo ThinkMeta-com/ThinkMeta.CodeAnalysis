@@ -231,11 +231,23 @@ public class CloneMethodAnalyzerUnitTests
     public async Task Test_NoDiagnostic_IgnoredProperty_Async()
     {
         var test = """
+            using System;
+
+            namespace ThinkMeta.CodeAnalysis
+            {
+                [AttributeUsage(AttributeTargets.Method | AttributeTargets.Assembly, AllowMultiple = true)]
+                internal sealed class CloneIgnoreAttribute : Attribute
+                {
+                    public CloneIgnoreAttribute(params string[] properties) { }
+                }
+            }
+
             class C
             {
                 public int X { get; set; }
-                public int IgnoredProp { get; set; }
+                public int Y { get; set; }
 
+                [ThinkMeta.CodeAnalysis.CloneIgnore(nameof(Y))]
                 public C Clone()
                 {
                     return new C { X = this.X };
@@ -314,5 +326,56 @@ public class CloneMethodAnalyzerUnitTests
 
         var expected = VerifyCS.Diagnostic("TM0002").WithSpan(6, 19, 6, 24).WithArguments("'Y'");
         await VerifyCS.VerifyCodeFixAsync(test, expected, fixtest);
+    }
+
+    [TestMethod]
+    public async Task Test_NoDiagnostic_PrivateMember_Async()
+    {
+        var test = """
+            class C
+            {
+                public int X { get; set; }
+                private int _y;
+
+                public C Clone()
+                {
+                    return new C { X = this.X };
+                }
+            }
+            """;
+
+        await VerifyCS.VerifyAnalyzerAsync(test);
+    }
+
+    [TestMethod]
+    public async Task Test_NoDiagnostic_AssemblyLevel_CloneIgnore_Async()
+    {
+        var test = """
+            using System;
+
+            [assembly: ThinkMeta.CodeAnalysis.CloneIgnore("Y")]
+
+            namespace ThinkMeta.CodeAnalysis
+            {
+                [AttributeUsage(AttributeTargets.Method | AttributeTargets.Assembly, AllowMultiple = true)]
+                internal sealed class CloneIgnoreAttribute : Attribute
+                {
+                    public CloneIgnoreAttribute(params string[] properties) { }
+                }
+            }
+
+            class C
+            {
+                public int X { get; set; }
+                public int Y { get; set; }
+
+                public C Clone()
+                {
+                    return new C { X = this.X };
+                }
+            }
+            """;
+
+        await VerifyCS.VerifyAnalyzerAsync(test);
     }
 }

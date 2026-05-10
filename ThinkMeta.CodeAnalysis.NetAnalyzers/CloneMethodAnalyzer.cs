@@ -28,8 +28,6 @@ public class CloneMethodAnalyzer : DiagnosticAnalyzer
     /// <summary>Diagnostic property key used to pass semicolon-separated missing property names to the code fix provider.</summary>
     public const string PropertyNamesKey = "PropertyNames";
 
-    private static readonly string[] _excludeKeywords = ["clone", "ignore", "exclude"];
-
     private static readonly DiagnosticDescriptor _missingPropertyRule = new(
         id: MissingPropertyId,
         title: "Clone method is missing property assignments",
@@ -92,10 +90,14 @@ public class CloneMethodAnalyzer : DiagnosticAnalyzer
         if (cloneableMembers.Length == 0)
             return;
 
+        var ignoredProperties = GetIgnoredProperties(methodSymbol);
         var (assigned, shallowAssignments) = AnalyzeBody(methodDecl, containingType, semanticModel, context.CancellationToken);
 
         var missingNames = new List<string>();
         foreach (var member in cloneableMembers) {
+            if (ignoredProperties.Contains(member.Name))
+                continue;
+
             if (!assigned.Contains(member.Name)) {
                 missingNames.Add(member.Name);
                 continue;
@@ -130,6 +132,38 @@ public class CloneMethodAnalyzer : DiagnosticAnalyzer
             });
     }
 
+    private static HashSet<string> GetIgnoredProperties(IMethodSymbol methodSymbol)
+    {
+        var ignored = new HashSet<string>(StringComparer.Ordinal);
+        CollectIgnoredFromAttributes(methodSymbol.ContainingAssembly.GetAttributes(), ignored);
+        CollectIgnoredFromAttributes(methodSymbol.GetAttributes(), ignored);
+        return ignored;
+    }
+
+    private static void CollectIgnoredFromAttributes(ImmutableArray<AttributeData> attributes, HashSet<string> target)
+    {
+        foreach (var attr in attributes) {
+            var name = attr.AttributeClass?.Name;
+            if (name is not "CloneIgnoreAttribute" and not "CloneIgnore")
+                continue;
+
+            if (attr.ConstructorArguments.Length == 0)
+                continue;
+
+            var arg = attr.ConstructorArguments[0];
+            if (arg.Kind == TypedConstantKind.Array) {
+                foreach (var value in arg.Values) {
+                    if (value.Value is string s)
+                        _ = target.Add(s);
+                }
+                continue;
+            }
+
+            if (arg.Value is string single)
+                _ = target.Add(single);
+        }
+    }
+
     private static ImmutableArray<ISymbol> GetCloneableMembers(INamedTypeSymbol containingType)
     {
         var members = ImmutableArray.CreateBuilder<ISymbol>();
@@ -141,10 +175,11 @@ public class CloneMethodAnalyzer : DiagnosticAnalyzer
                 if (member.IsStatic || member.IsImplicitlyDeclared)
                     continue;
 
+                if (member.DeclaredAccessibility == Accessibility.Private)
+                    continue;
+
                 if (member is IPropertySymbol property) {
                     if (property.IsAbstract || property.IsIndexer || property.SetMethod is null)
-                        continue;
-                    if (IsExcluded(member))
                         continue;
                     members.Add(property);
                     continue;
@@ -152,8 +187,6 @@ public class CloneMethodAnalyzer : DiagnosticAnalyzer
 
                 if (member is IFieldSymbol field) {
                     if (field.IsReadOnly || field.IsConst)
-                        continue;
-                    if (IsExcluded(member))
                         continue;
                     members.Add(field);
                 }
@@ -163,29 +196,6 @@ public class CloneMethodAnalyzer : DiagnosticAnalyzer
         }
 
         return members.ToImmutable();
-    }
-
-    private static bool IsExcluded(ISymbol member)
-    {
-        if (ContainsExcludeKeyword(member.Name))
-            return true;
-
-        foreach (var attr in member.GetAttributes()) {
-            var attrName = attr.AttributeClass?.Name;
-            if (attrName is not null && ContainsExcludeKeyword(attrName))
-                return true;
-        }
-
-        return false;
-    }
-
-    private static bool ContainsExcludeKeyword(string name)
-    {
-        foreach (var kw in _excludeKeywords) {
-            if (name.IndexOf(kw, StringComparison.OrdinalIgnoreCase) >= 0)
-                return true;
-        }
-        return false;
     }
 
     private static (HashSet<string> Assigned, Dictionary<string, Location> ShallowAssignments) AnalyzeBody(

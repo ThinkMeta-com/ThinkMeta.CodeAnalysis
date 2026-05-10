@@ -58,7 +58,7 @@ Forgetting to assign a property in a `Clone()` method leads to silent data loss 
 The accompanying code fix adds all missing property assignments in a single edit, for both object-initializer and statement-based clone patterns.
 
 **Exclusions:**  
-Properties are skipped when their name or attribute name contains "clone", "ignore", or "exclude" (case-insensitive), when they have no setter, or when the method uses `MemberwiseClone()`.
+Properties are skipped when they have no setter, are private, or when the method uses `MemberwiseClone()`. Use `[CloneIgnore]` to explicitly exclude properties by name (see below).
 
 **Examples:**
 
@@ -86,7 +86,7 @@ Shallow copying a reference type shares the same object between the original and
 Replace `this.Prop` with a proper deep copy (e.g., `this.Prop.Clone()`, `new T(this.Prop)`, etc.).
 
 **Exceptions:**  
-`string` is exempt because it is immutable. Properties excluded from TM0002 (e.g., those whose name contains "ignore") are also excluded here.
+`string` is exempt because it is immutable. Private properties and properties excluded via `[CloneIgnore]` are also skipped.
 
 **Examples:**
 
@@ -100,4 +100,27 @@ class C
     // TM0003 fires on "this.Item" — shallow copy of reference type
     public C Clone() => new C { Item = this.Item };
 }
+```
+
+### CloneIgnoreAttribute
+
+Use `[CloneIgnore("PropName")]` to suppress TM0002/TM0003 for specific properties. The attribute is shipped as a content file and compiled into the consuming project automatically.
+
+**Method level** — exclude a property for one Clone method:
+
+```csharp
+[CloneIgnore(nameof(Computed))]
+public MyClass Clone() => new MyClass { Id = this.Id }; // 'Computed' is not reported
+```
+
+**Assembly level** — exclude a property across all Clone methods in the assembly (e.g. in `AssemblyInfo.cs`):
+
+```csharp
+[assembly: ThinkMeta.CodeAnalysis.CloneIgnore("AdditionalProperties")]
+```
+
+Multiple properties and multiple attributes are supported:
+
+```csharp
+[assembly: ThinkMeta.CodeAnalysis.CloneIgnore("AdditionalProperties", "Computed")]
 ```
