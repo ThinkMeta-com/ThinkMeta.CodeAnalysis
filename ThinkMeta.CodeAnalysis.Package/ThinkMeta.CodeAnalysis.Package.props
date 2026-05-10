@@ -12,7 +12,7 @@
         <Version>$(SolutionPackageVersion)</Version>
 
         <PackageReleaseNotes>
-            Removed non-working analyzer rules.
+            Added Clone method analyzers: TM0002 warns on missing property assignments in Clone() methods with a single-edit code fix; TM0003 warns on shallow copies of reference-type properties in Clone() methods.
         </PackageReleaseNotes>
     </PropertyGroup>
 </Project>
