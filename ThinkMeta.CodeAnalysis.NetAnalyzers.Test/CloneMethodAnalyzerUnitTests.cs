@@ -233,7 +233,7 @@ public class CloneMethodAnalyzerUnitTests
         var test = """
             using System;
 
-            namespace ThinkMeta.CodeAnalysis
+            namespace ThinkMeta.CodeAnalysis.Annotations
             {
                 [AttributeUsage(AttributeTargets.Method | AttributeTargets.Assembly, AllowMultiple = true)]
                 internal sealed class CloneIgnoreAttribute : Attribute
@@ -247,7 +247,7 @@ public class CloneMethodAnalyzerUnitTests
                 public int X { get; set; }
                 public int Y { get; set; }
 
-                [ThinkMeta.CodeAnalysis.CloneIgnore(nameof(Y))]
+                [ThinkMeta.CodeAnalysis.Annotations.CloneIgnore(nameof(Y))]
                 public C Clone()
                 {
                     return new C { X = this.X };
@@ -353,9 +353,9 @@ public class CloneMethodAnalyzerUnitTests
         var test = """
             using System;
 
-            [assembly: ThinkMeta.CodeAnalysis.CloneIgnore("Y")]
+            [assembly: ThinkMeta.CodeAnalysis.Annotations.CloneIgnore("Y")]
 
-            namespace ThinkMeta.CodeAnalysis
+            namespace ThinkMeta.CodeAnalysis.Annotations
             {
                 [AttributeUsage(AttributeTargets.Method | AttributeTargets.Assembly, AllowMultiple = true)]
                 internal sealed class CloneIgnoreAttribute : Attribute

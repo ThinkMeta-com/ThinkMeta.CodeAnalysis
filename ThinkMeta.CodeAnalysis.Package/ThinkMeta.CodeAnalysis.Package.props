@@ -12,7 +12,7 @@
         <Version>$(SolutionPackageVersion)</Version>
 
         <PackageReleaseNotes>
-            Added CloneIgnoreAttribute (NuGet content file) to exclude properties from Clone analysis at method or assembly level. Private properties are no longer reported by TM0002/TM0003.
+            CloneIgnoreAttribute is now shipped as a compiled assembly (ThinkMeta.CodeAnalysis.Annotations.dll) under the ThinkMeta.CodeAnalysis.Annotations namespace, replacing the previous source content file.
         </PackageReleaseNotes>
     </PropertyGroup>
 </Project>

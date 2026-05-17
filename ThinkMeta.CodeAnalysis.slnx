@@ -26,6 +26,7 @@
     <File Path="ThinkMeta.SolutionFiles/ThinkMeta.Net.Build.targets" />
     <File Path="ThinkMeta.SolutionFiles/ThinkMeta.Packages.props" />
   </Folder>
+  <Project Path="ThinkMeta.CodeAnalysis.Annotations/ThinkMeta.CodeAnalysis.Annotations.csproj" />
   <Project Path="ThinkMeta.CodeAnalysis.NetAnalyzers.CodeFixes/ThinkMeta.CodeAnalysis.NetAnalyzers.CodeFixes.csproj" />
   <Project Path="ThinkMeta.CodeAnalysis.NetAnalyzers.Test/ThinkMeta.CodeAnalysis.NetAnalyzers.Test.csproj" />
   <Project Path="ThinkMeta.CodeAnalysis.NetAnalyzers/ThinkMeta.CodeAnalysis.NetAnalyzers.csproj" />

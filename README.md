@@ -116,11 +116,11 @@ public MyClass Clone() => new MyClass { Id = this.Id }; // 'Computed' is not rep
 **Assembly level** — exclude a property across all Clone methods in the assembly (e.g. in `AssemblyInfo.cs`):
 
 ```csharp
-[assembly: ThinkMeta.CodeAnalysis.CloneIgnore("AdditionalProperties")]
+[assembly: ThinkMeta.CodeAnalysis.Annotations.CloneIgnore("AdditionalProperties")]
 ```
 
 Multiple properties and multiple attributes are supported:
 
 ```csharp
-[assembly: ThinkMeta.CodeAnalysis.CloneIgnore("AdditionalProperties", "Computed")]
+[assembly: ThinkMeta.CodeAnalysis.Annotations.CloneIgnore("AdditionalProperties", "Computed")]
 ```
