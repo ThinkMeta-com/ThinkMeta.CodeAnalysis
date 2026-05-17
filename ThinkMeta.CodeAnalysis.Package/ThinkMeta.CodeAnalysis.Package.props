@@ -12,7 +12,7 @@
         <Version>$(SolutionPackageVersion)</Version>
 
         <PackageReleaseNotes>
-            CloneIgnoreAttribute is now shipped as a compiled assembly (ThinkMeta.CodeAnalysis.Annotations.dll) under the ThinkMeta.CodeAnalysis.Annotations namespace, replacing the previous source content file.
+            CloneIgnoreAttribute is now a compiled assembly shipped in lib/netstandard2.0, ensuring it is available at runtime (e.g. in WASM projects). Removed empty build props file.
         </PackageReleaseNotes>
     </PropertyGroup>
 </Project>

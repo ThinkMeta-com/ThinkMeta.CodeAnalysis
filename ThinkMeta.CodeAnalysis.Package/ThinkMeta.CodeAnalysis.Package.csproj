@@ -17,9 +17,7 @@
     <ItemGroup>
         <None Include="$(TM_BuildPath)Release\bin\netstandard2.0\ThinkMeta.CodeAnalysis.NetAnalyzers.dll" Pack="true" PackagePath="analyzers/dotnet/cs" />
         <None Include="$(TM_BuildPath)Release\bin\netstandard2.0\ThinkMeta.CodeAnalysis.NetAnalyzers.CodeFixes.dll" Pack="true" PackagePath="analyzers/dotnet/cs" />
-        <None Include="$(TM_BuildPath)Release\bin\netstandard2.0\ThinkMeta.CodeAnalysis.Annotations.dll" Pack="true" PackagePath="build" />
-
-        <None Include="$(SolutionDir)build\ThinkMeta.CodeAnalysis.CSharp.props" Pack="true" PackagePath="build" />
+        <None Include="$(TM_BuildPath)Release\bin\netstandard2.0\ThinkMeta.CodeAnalysis.Annotations.dll" Pack="true" PackagePath="lib/netstandard2.0" />
 
         <None Include="$(SolutionDir)LICENSE" Pack="true" PackagePath="/" />
         <None Include="$(SolutionDir)README.md" Pack="true" PackagePath="/" />
