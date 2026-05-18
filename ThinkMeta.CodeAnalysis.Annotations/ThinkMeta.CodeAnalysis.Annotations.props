@@ -1,0 +1,17 @@
+<Project>
+    <PropertyGroup>
+        <TM_GitHubProjectName>ThinkMeta.CodeAnalysis</TM_GitHubProjectName>
+
+        <PackageId>ThinkMeta.CodeAnalysis.Annotations</PackageId>
+        <Title>Annotations for ThinkMeta.CodeAnalysis.CSharp</Title>
+        <Description>Provides attributes used by the ThinkMeta.CodeAnalysis.CSharp analyzer, such as CloneIgnoreAttribute.</Description>
+        <PackageTags>code analyzer;Roslyn;static analysis;C#;dotnet analyzer;annotations</PackageTags>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <Version>$(SolutionPackageVersion)</Version>
+
+        <PackageReleaseNotes>
+            Initial release of ThinkMeta.CodeAnalysis.Annotations. Contains CloneIgnoreAttribute for use with the ThinkMeta.CodeAnalysis.CSharp analyzer.
+        </PackageReleaseNotes>
+    </PropertyGroup>
+</Project>
