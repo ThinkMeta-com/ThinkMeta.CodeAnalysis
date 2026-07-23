@@ -1,7 +1,13 @@
 # Release Notes
 
+## 1.0.16
+- Split `ThinkMeta.CodeAnalysis.Annotations` into a separate NuGet package (`ThinkMeta.CodeAnalysis.Annotations`), declared as a dependency of `ThinkMeta.CodeAnalysis.CSharp`.
+
+## 1.0.15
+- Fixed runtime availability of `CloneIgnoreAttribute` by shipping it as a compiled assembly in `lib/netstandard2.0`.
+
 ## 1.0.13
-- Added `CloneIgnoreAttribute` (shipped as a NuGet content file) to explicitly exclude properties from Clone analysis at method or assembly level.
+- Added `CloneIgnoreAttribute` to explicitly exclude properties from Clone analysis at method or assembly level.
 - Private properties are no longer reported by TM0002 or TM0003.
 
 ## 1.0.12

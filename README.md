@@ -2,9 +2,24 @@
 Static code analyzer for C#
 
 [![NuGet Package](https://img.shields.io/nuget/v/ThinkMeta.CodeAnalysis.CSharp)](https://www.nuget.org/packages/ThinkMeta.CodeAnalysis.CSharp) ThinkMeta.CodeAnalysis.CSharp<br>
+[![NuGet Package](https://img.shields.io/nuget/v/ThinkMeta.CodeAnalysis.Annotations)](https://www.nuget.org/packages/ThinkMeta.CodeAnalysis.Annotations) ThinkMeta.CodeAnalysis.Annotations<br>
 
 ## Overview
 ThinkMeta.CodeAnalysis is a static code analyzer for C# projects, built on Roslyn. It helps developers identify code issues, enforce coding standards, and improve code quality automatically.
+
+## Installation
+
+Add the analyzer package to your project:
+
+```xml
+<PackageReference Include="ThinkMeta.CodeAnalysis.CSharp" Version="1.0.16" PrivateAssets="all" IncludeAssets="runtime; build; native; contentfiles; analyzers; buildtransitive" />
+```
+
+If you use `[CloneIgnore]` attributes in your code, also reference the annotations package:
+
+```xml
+<PackageReference Include="ThinkMeta.CodeAnalysis.Annotations" Version="1.0.16" />
+```
 
 ## Features
 - Detects common code issues and anti-patterns
@@ -104,11 +119,13 @@ class C
 
 ### CloneIgnoreAttribute
 
-Use `[CloneIgnore("PropName")]` to suppress TM0002/TM0003 for specific properties. The attribute is shipped as a content file and compiled into the consuming project automatically.
+Install the [`ThinkMeta.CodeAnalysis.Annotations`](https://www.nuget.org/packages/ThinkMeta.CodeAnalysis.Annotations) package and use `[CloneIgnore("PropName")]` to suppress TM0002/TM0003 for specific properties.
 
 **Method level** — exclude a property for one Clone method:
 
 ```csharp
+using ThinkMeta.CodeAnalysis.Annotations;
+
 [CloneIgnore(nameof(Computed))]
 public MyClass Clone() => new MyClass { Id = this.Id }; // 'Computed' is not reported
 ```
