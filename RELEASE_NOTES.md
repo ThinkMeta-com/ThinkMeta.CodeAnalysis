@@ -1,5 +1,8 @@
 # Release Notes
 
+## 1.0.17
+- Fixed false positives in NullEqualityAnalyzer (TM0001) for LINQ query syntax translated into expression trees (e.g. queries over `IQueryable`/EF Core sources), where the suggested pattern-matching replacement is not valid C#.
+
 ## 1.0.16
 - Split `ThinkMeta.CodeAnalysis.Annotations` into a separate NuGet package (`ThinkMeta.CodeAnalysis.Annotations`), declared as a dependency of `ThinkMeta.CodeAnalysis.CSharp`.
 

@@ -12,13 +12,13 @@ ThinkMeta.CodeAnalysis is a static code analyzer for C# projects, built on Rosly
 Add the analyzer package to your project:
 
 ```xml
-<PackageReference Include="ThinkMeta.CodeAnalysis.CSharp" Version="1.0.16" PrivateAssets="all" IncludeAssets="runtime; build; native; contentfiles; analyzers; buildtransitive" />
+<PackageReference Include="ThinkMeta.CodeAnalysis.CSharp" Version="1.0.17" PrivateAssets="all" IncludeAssets="runtime; build; native; contentfiles; analyzers; buildtransitive" />
 ```
 
 If you use `[CloneIgnore]` attributes in your code, also reference the annotations package:
 
 ```xml
-<PackageReference Include="ThinkMeta.CodeAnalysis.Annotations" Version="1.0.16" />
+<PackageReference Include="ThinkMeta.CodeAnalysis.Annotations" Version="1.0.17" />
 ```
 
 ## Features

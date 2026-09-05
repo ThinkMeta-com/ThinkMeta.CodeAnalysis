@@ -62,18 +62,45 @@ public class NullEqualityAnalyzer : DiagnosticAnalyzer
         var semanticModel = context.SemanticModel;
         var node = context.Node;
 
-        foreach (var lambda in node.Ancestors().OfType<LambdaExpressionSyntax>()) {
-            var typeInfo = semanticModel.GetTypeInfo(lambda, context.CancellationToken);
-            var convertedType = typeInfo.ConvertedType;
+        foreach (var ancestor in node.Ancestors()) {
+            switch (ancestor) {
+                case LambdaExpressionSyntax lambda:
+                    var typeInfo = semanticModel.GetTypeInfo(lambda, context.CancellationToken);
+                    if (IsExpressionType(typeInfo.ConvertedType))
+                        return true;
+                    break;
 
-            if (convertedType is not null &&
-                convertedType.OriginalDefinition.ToString().StartsWith("System.Linq.Expressions.Expression")) {
-                return true;
+                // Query syntax (from/let/where/join/orderby) is translated by the compiler into
+                // implicit lambdas that never appear as LambdaExpressionSyntax nodes. When the
+                // translated method (e.g. Queryable.Where) expects an Expression<TDelegate>, the
+                // clause's body is part of an expression tree just like an explicit lambda would be.
+                case QueryClauseSyntax queryClause:
+                    var clauseInfo = semanticModel.GetQueryClauseInfo(queryClause, context.CancellationToken);
+                    if (IsExpressionTreeMethod(clauseInfo.OperationInfo.Symbol) || IsExpressionTreeMethod(clauseInfo.CastInfo.Symbol))
+                        return true;
+                    break;
+
+                // Same reasoning as above, but for the "select"/"group" clause, which the semantic
+                // model exposes via GetSymbolInfo instead of GetQueryClauseInfo.
+                case SelectOrGroupClauseSyntax selectOrGroupClause:
+                    var symbolInfo = semanticModel.GetSymbolInfo(selectOrGroupClause, context.CancellationToken);
+                    if (IsExpressionTreeMethod(symbolInfo.Symbol))
+                        return true;
+                    break;
+
+                default:
+                    break;
             }
         }
 
         return false;
     }
+
+    private static bool IsExpressionType(ITypeSymbol? type) =>
+        type is not null && type.OriginalDefinition.ToString().StartsWith("System.Linq.Expressions.Expression");
+
+    private static bool IsExpressionTreeMethod(ISymbol? symbol) =>
+        symbol is IMethodSymbol method && method.Parameters.Any(p => IsExpressionType(p.Type));
 
     // Only analyze .g.cs files if they are generated from .razor files (Razor components).
     // All non-generated files are always supported.

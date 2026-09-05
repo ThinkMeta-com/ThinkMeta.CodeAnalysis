@@ -186,4 +186,40 @@ public class NullEqualityAnalyzerUnitTests
         var expected = VerifyCS.Diagnostic("TM0001").WithSpan(7, 37, 7, 46).WithArguments("is not null", "!= null");
         await VerifyCS.VerifyCodeFixAsync(test, expected, fixtest);
     }
+
+    [TestMethod]
+    public async Task TestNoDiagnosticInsideExpressionTree_QuerySyntax_WhereAsync()
+    {
+        var test = """
+            using System.Linq;
+
+            class A
+            {
+                void M(IQueryable<object> src)
+                {
+                    var q = from o in src where o == null select o;
+                }
+            }
+            """;
+
+        await VerifyCS.VerifyAnalyzerAsync(test);
+    }
+
+    [TestMethod]
+    public async Task TestNoDiagnosticInsideExpressionTree_QuerySyntax_SelectAsync()
+    {
+        var test = """
+            using System.Linq;
+
+            class A
+            {
+                void M(IQueryable<string> src)
+                {
+                    var q = from s in src select s != null ? s : "x";
+                }
+            }
+            """;
+
+        await VerifyCS.VerifyAnalyzerAsync(test);
+    }
 }

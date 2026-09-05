@@ -12,7 +12,7 @@
         <Version>$(SolutionPackageVersion)</Version>
 
         <PackageReleaseNotes>
-            ThinkMeta.CodeAnalysis.Annotations is now a separate NuGet package and is declared as a dependency. Install it independently to use CloneIgnoreAttribute without the analyzer.
+            Fixed false positives in NullEqualityAnalyzer (TM0001) for LINQ query syntax translated into expression trees (e.g. queries over IQueryable/EF Core sources), where the suggested pattern-matching replacement is not valid C#.
         </PackageReleaseNotes>
     </PropertyGroup>
 </Project>
